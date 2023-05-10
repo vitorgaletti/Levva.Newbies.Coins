@@ -1,5 +1,9 @@
 using Levva.Newbies.Coins.Data;
+using Levva.Newbies.Coins.Data.Repositories;
+using Levva.Newbies.Coins.Data.Repositories.Interfaces;
+using Levva.Newbies.Coins.Logic.Interfaces;
 using Levva.Newbies.Coins.Logic.MapperProfiles;
+using Levva.Newbies.Coins.Logic.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 
@@ -22,6 +26,14 @@ public class Program {
             b => b.MigrationsAssembly("Levva.Newbies.Coins")));
 
         builder.Services.AddAutoMapper(typeof(DefaultMapper));
+
+        builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+        builder.Services.AddScoped<ITransacaoRepository, TransacaoRepository>();
+        builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+
+        builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+        builder.Services.AddScoped<ITransacaoService, TransacaoService>();
+        builder.Services.AddScoped<ICategoriaService, CategoriaService>();
         
         var app = builder.Build();
 
