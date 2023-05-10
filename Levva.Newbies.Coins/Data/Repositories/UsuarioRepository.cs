@@ -9,19 +9,19 @@ namespace Levva.Newbies.Coins.Data.Repositories {
             _context = context;
         }
 
-        public void Create(Usuario usuario) {
+        public void Create(UsuarioDto usuario) {
             _context.Usuario.Add(usuario);
         }
 
-        public Usuario Get(int Id) {
+        public UsuarioDto Get(int Id) {
             return  _context.Usuario.Find(Id);
         }
 
-        public List<Usuario> GetAll() {
+        public List<UsuarioDto> GetAll() {
             return _context.Usuario.ToList();
         }
 
-        public void Update(Usuario usuario) {
+        public void Update(UsuarioDto usuario) {
             _context.Usuario.Update(usuario);
         }
 

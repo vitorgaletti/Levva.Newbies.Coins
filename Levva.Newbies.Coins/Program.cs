@@ -1,4 +1,5 @@
 using Levva.Newbies.Coins.Data;
+using Levva.Newbies.Coins.Logic.MapperProfiles;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 
@@ -20,6 +21,8 @@ public class Program {
             .GetConnectionString("Default"), 
             b => b.MigrationsAssembly("Levva.Newbies.Coins")));
 
+        builder.Services.AddAutoMapper(typeof(DefaultMapper));
+        
         var app = builder.Build();
 
         if (app.Environment.IsDevelopment()) {

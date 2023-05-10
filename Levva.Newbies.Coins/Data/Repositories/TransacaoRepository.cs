@@ -11,20 +11,20 @@ namespace Levva.Newbies.Coins.Data.Repositories {
            
         }
 
-        public void Create(Transacao transacao) {
+        public void Create(TransacaoDto transacao) {
             _context.Transacao.Add(transacao);
             _context.SaveChanges();
         }
 
-        public Transacao Get(int Id) {
+        public TransacaoDto Get(int Id) {
             return _context.Transacao.Find(Id);
         }
 
-        public List<Transacao> GetAll() {
+        public List<TransacaoDto> GetAll() {
             return _context.Transacao.ToList();
         }
 
-        public void Update(Transacao transacao) {
+        public void Update(TransacaoDto transacao) {
             _context.Transacao.Update(transacao);
             _context.SaveChanges();
         }

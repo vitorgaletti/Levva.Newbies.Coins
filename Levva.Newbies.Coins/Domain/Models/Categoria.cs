@@ -6,3 +6,4 @@
         public virtual List<Transacao> Transacoes { get; set; }
     }
 }
+
