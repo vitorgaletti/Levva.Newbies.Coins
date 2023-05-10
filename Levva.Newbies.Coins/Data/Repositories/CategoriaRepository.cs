@@ -12,6 +12,7 @@ namespace Levva.Newbies.Coins.Data.Repositories {
 
         public void Create(Categoria categoria) {
             _context.Categoria.Add(categoria);
+            _context.SaveChanges();
         }
 
         public Categoria Get(int Id) {
@@ -24,11 +25,13 @@ namespace Levva.Newbies.Coins.Data.Repositories {
 
         public void Update(Categoria categoria) {
             _context.Categoria.Update(categoria);
+            _context.SaveChanges();
         }
 
         public void Delete(int Id) {
             var categoria = _context.Categoria.Find(Id);
             _context.Categoria.Remove(categoria);
+            _context.SaveChanges();
         }
     }
 }
