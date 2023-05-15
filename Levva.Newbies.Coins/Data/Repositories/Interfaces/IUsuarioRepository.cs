@@ -5,6 +5,8 @@ namespace Levva.Newbies.Coins.Data.Repositories.Interfaces {
 
         void Create(Usuario usuario);
         Usuario Get(int Id);
+
+        Usuario GetByEmailAndSenha(string email, string senha);
         List<Usuario> GetAll();
         void Update(Usuario usuario);
         void Delete(int Id);
