@@ -1,7 +1,6 @@
-﻿using Levva.Newbies.Coins.Logic.Dtos;
-using Levva.Newbies.Coins.Logic.Interfaces;
+﻿using Levva.Newbies.Coins.Business.Dtos;
+using Levva.Newbies.Coins.Business.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Levva.Newbies.Coins.Controllers {
