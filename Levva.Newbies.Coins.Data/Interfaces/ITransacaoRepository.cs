@@ -2,12 +2,8 @@
 
 namespace Levva.Newbies.Coins.Data.Interfaces
 {
-    public interface ITransacaoRepository
+    public interface ITransacaoRepository : IRepository<Transacao>
     {
-        void Create(Transacao transacao);
-        Transacao Get(int Id);
-        List<Transacao> GetAll();
-        void Update(Transacao transacao);
-        void Delete(int Id);
+        List<Transacao> GetAll(int limit = 10, int offset = 1);
     }
 }

@@ -7,10 +7,10 @@ using Levva.Newbies.Coins.Business.Interfaces;
 namespace Levva.Newbies.Coins.Business.Services {
     public class CategoriaService : ICategoriaService {
         
-        private readonly ICategoriaRepository _repository;
+        private readonly IRepository<Categoria> _repository;
         private readonly IMapper _mapper;
 
-        public CategoriaService(ICategoriaRepository repository, IMapper mapper) {
+        public CategoriaService(IRepository<Categoria> repository, IMapper mapper) {
             _repository = repository;
             _mapper = mapper;
         }

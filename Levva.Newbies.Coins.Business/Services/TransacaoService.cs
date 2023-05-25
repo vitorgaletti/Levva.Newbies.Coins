@@ -25,8 +25,8 @@ namespace Levva.Newbies.Coins.Business.Services {
            return transacao;
         }
 
-        public List<TransacaoDto> GetAll() {
-            var transacoes = _mapper.Map<List<TransacaoDto>>(_repository.GetAll());
+        public List<TransacaoDto> GetAll(int limit, int offset) {
+            var transacoes = _mapper.Map<List<TransacaoDto>>(_repository.GetAll(limit, offset));
             return transacoes;
         }
 
