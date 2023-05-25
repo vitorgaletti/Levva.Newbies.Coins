@@ -24,9 +24,9 @@ namespace Levva.Newbies.Coins.Controllers {
            return _service.Get(id);
         }
 
-        [HttpGet("list")]
-        public ActionResult<List<TransacaoDto>> GetAll() {
-            return _service.GetAll();
+        [HttpGet("list/{pageSize:int}/{pageNumber:int}")]
+        public ActionResult<List<TransacaoDto>> GetAll(int pageSize, int pageNumber) {
+            return _service.GetAll(pageSize, pageNumber);
         }
 
         [HttpPut]
