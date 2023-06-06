@@ -45,7 +45,7 @@ namespace Levva.Newbies.Coins.Business.Services {
         }
 
         public LoginDto Login(LoginDto loginDto) {
-            var usuario = _repository.GetByEmailAndSenha(loginDto.Email, loginDto.Senha);
+            var usuario = _repository.GetByEmailAndSenha(loginDto.Email, loginDto.Password);
 
             if (usuario == null) {
                 return null;
@@ -64,10 +64,11 @@ namespace Levva.Newbies.Coins.Business.Services {
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            loginDto.Token = tokenHandler.WriteToken(token);
-            loginDto.Nome = usuario.Nome;
+            loginDto.Token = "Bearer " + tokenHandler.WriteToken(token);
+            loginDto.Id = usuario.Id;
+            loginDto.Name = usuario.Nome;
             loginDto.Email = usuario.Email;
-            loginDto.Senha = null;
+            loginDto.Password = null;
 
             return loginDto;
 
