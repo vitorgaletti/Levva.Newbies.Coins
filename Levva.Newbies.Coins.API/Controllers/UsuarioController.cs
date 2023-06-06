@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Levva.Newbies.Coins.Controllers {
-    [Route("api/[controller]")]
+    [Route("api")]
     [ApiController]
     public class UsuarioController : ControllerBase {
 
@@ -14,7 +14,7 @@ namespace Levva.Newbies.Coins.Controllers {
             _service = service;
         }
 
-        [HttpPost]
+        [HttpPost("user")]
         [AllowAnonymous]
         public IActionResult Create(UsuarioDto usuario) {
             _service.Create(usuario);
@@ -41,18 +41,6 @@ namespace Levva.Newbies.Coins.Controllers {
         public IActionResult Delete(int id) {
             _service.Delete(id);
             return Ok();
-        }
-
-        [HttpPost("login")]
-        [AllowAnonymous]
-        public ActionResult<LoginDto> Login(LoginDto? loginDto) {
-            var login = _service.Login(loginDto);
-
-            if(login == null) {
-                return BadRequest("Usuário ou senha inválidos");
-            }
-
-            return Ok(login);
         }
     }
 }

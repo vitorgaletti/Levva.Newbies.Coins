@@ -15,6 +15,7 @@ public class Program {
 
         var builder = WebApplication.CreateBuilder(args);
 
+
         builder.Services.AddControllers();
 
         builder.Services.AddEndpointsApiExplorer();
@@ -70,6 +71,14 @@ public class Program {
 
         builder.Services.AddNewbiesService(builder.Configuration);
 
+        
+        builder.Services.AddCors(options => {
+            options.AddDefaultPolicy(builder => {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            });
+        });
 
         var app = builder.Build();
 
@@ -77,6 +86,8 @@ public class Program {
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+
+        app.UseCors();
 
         app.UseHttpsRedirection();
 
@@ -92,7 +103,13 @@ public class Program {
 
         app.Run();
     }
+
+
+
 }
+
+
+    
 
 
 
