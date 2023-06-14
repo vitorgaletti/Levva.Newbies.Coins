@@ -6,9 +6,9 @@ namespace Levva.Newbies.Coins.Business.MapperProfiles {
     public class DefaultMapper : Profile {
 
         public DefaultMapper() {
-            CreateMap<UsuarioDto, Usuario>().ReverseMap();
-            CreateMap<TransacaoDto, Transacao>().ReverseMap();
-            CreateMap<CategoriaDto, Categoria>().ReverseMap();
+            CreateMap<UserDto, User>().ReverseMap();
+            CreateMap<TransactionDto, Transaction>().ReverseMap();
+            CreateMap<CategoryDto, Category>().ReverseMap();
         }
     }
 }

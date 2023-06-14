@@ -1,7 +1,6 @@
 ﻿using Levva.Newbies.Coins.Business.Dtos;
 using Levva.Newbies.Coins.Business.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Levva.Newbies.Coins.Controllers {
@@ -9,22 +8,22 @@ namespace Levva.Newbies.Coins.Controllers {
     [ApiController]
     public class LoginController : ControllerBase {
 
-        private readonly IUsuarioService _service;
+        private readonly IUserService _service;
 
-        public LoginController(IUsuarioService service) {
+        public LoginController(IUserService service) {
             _service = service;
         }
 
         [HttpPost("auth")]
         [AllowAnonymous]
-        public ActionResult<LoginDto> Login(LoginDto? loginDto) {
-            var login = _service.Login(loginDto);
+        public async Task<ActionResult<LoginDto>> Login(LoginDto? loginDto) {
+            var result = await _service.Login(loginDto);
 
-            if(login == null) {
-                return BadRequest("Usuário ou senha inválidos");
+            if(result.hasError) {
+                return Unauthorized(result);
             }
 
-            return Ok(login);
+            return Ok(result);
         }
     }
 }
