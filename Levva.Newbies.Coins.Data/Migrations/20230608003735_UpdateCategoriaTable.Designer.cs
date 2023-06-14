@@ -3,6 +3,7 @@ using System;
 using Levva.Newbies.Coins.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,14 +11,16 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Levva.Newbies.Coins.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20230608003735_UpdateCategoriaTable")]
+    partial class UpdateCategoriaTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
 
-            modelBuilder.Entity("Levva.Newbies.Coins.Domain.Models.Category", b =>
+            modelBuilder.Entity("Levva.Newbies.Coins.Domain.Models.Categoria", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,10 +33,10 @@ namespace Levva.Newbies.Coins.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categoria");
                 });
 
-            modelBuilder.Entity("Levva.Newbies.Coins.Domain.Models.Transaction", b =>
+            modelBuilder.Entity("Levva.Newbies.Coins.Domain.Models.Transacao", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,7 +49,7 @@ namespace Levva.Newbies.Coins.Migrations
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
@@ -66,10 +69,10 @@ namespace Levva.Newbies.Coins.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Transaction");
+                    b.ToTable("Transacao");
                 });
 
-            modelBuilder.Entity("Levva.Newbies.Coins.Domain.Models.User", b =>
+            modelBuilder.Entity("Levva.Newbies.Coins.Domain.Models.Usuario", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -92,36 +95,36 @@ namespace Levva.Newbies.Coins.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Usuario");
                 });
 
-            modelBuilder.Entity("Levva.Newbies.Coins.Domain.Models.Transaction", b =>
+            modelBuilder.Entity("Levva.Newbies.Coins.Domain.Models.Transacao", b =>
                 {
-                    b.HasOne("Levva.Newbies.Coins.Domain.Models.Category", "Category")
-                        .WithMany("Transactions")
+                    b.HasOne("Levva.Newbies.Coins.Domain.Models.Categoria", "Categoria")
+                        .WithMany("Transacoes")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Levva.Newbies.Coins.Domain.Models.User", "User")
-                        .WithMany("Transactions")
+                    b.HasOne("Levva.Newbies.Coins.Domain.Models.Usuario", "Usuario")
+                        .WithMany("Transacoes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Category");
+                    b.Navigation("Categoria");
 
-                    b.Navigation("User");
+                    b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("Levva.Newbies.Coins.Domain.Models.Category", b =>
+            modelBuilder.Entity("Levva.Newbies.Coins.Domain.Models.Categoria", b =>
                 {
-                    b.Navigation("Transactions");
+                    b.Navigation("Transacoes");
                 });
 
-            modelBuilder.Entity("Levva.Newbies.Coins.Domain.Models.User", b =>
+            modelBuilder.Entity("Levva.Newbies.Coins.Domain.Models.Usuario", b =>
                 {
-                    b.Navigation("Transactions");
+                    b.Navigation("Transacoes");
                 });
 #pragma warning restore 612, 618
         }

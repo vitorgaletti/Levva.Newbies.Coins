@@ -13,16 +13,16 @@ namespace Levva.Newbies.Coins.Infra.IoC {
     public static class DependencyInjector {
 
         public static void AddNewbiesService(this IServiceCollection services, IConfiguration configuration) {
-            services.AddDbContext<IContext, Context>(options => options.UseSqlite(configuration.GetConnectionString("Default"), b => b.MigrationsAssembly("Levva.Newbies.Coins")));
+            services.AddDbContext<IContext, Context>(options => options.UseSqlite(configuration.GetConnectionString("Default"), b => b.MigrationsAssembly(typeof(Context).Assembly.FullName)));
             services.AddAutoMapper(typeof(DefaultMapper));
 
-            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-            services.AddScoped<ITransacaoRepository, TransacaoRepository>();
-            services.AddScoped<IRepository<Categoria>, Repository<Categoria>>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
 
-            services.AddScoped<IUsuarioService, UsuarioService>();
-            services.AddScoped<ITransacaoService, TransacaoService>();
-            services.AddScoped<ICategoriaService, CategoriaService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITransactionService, TransactionService>();
+            services.AddScoped<ICategoryService, CategoryService>();
         }
     }
 }

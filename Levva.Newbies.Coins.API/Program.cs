@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using System.Globalization;
 using System.Text;
 using Levva.Newbies.Coins.Infra.IoC;
+using System.Text.Json.Serialization;
 
 namespace Levva.Newbies.Coins;
 
@@ -71,7 +72,10 @@ public class Program {
 
         builder.Services.AddNewbiesService(builder.Configuration);
 
-        
+        builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+
         builder.Services.AddCors(options => {
             options.AddDefaultPolicy(builder => {
                 builder.AllowAnyOrigin()

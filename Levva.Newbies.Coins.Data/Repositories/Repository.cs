@@ -12,28 +12,33 @@ namespace Levva.Newbies.Coins.Data.Repositories {
             _entity = Context.Set<T>();
         }
 
-        public void Create(T entity) {
+        public async Task<T> Create(T entity) {
+            if (entity is IGuidIdEntity guidIdEntity) 
+            {
+                guidIdEntity.Id = Guid.NewGuid(); 
+            }
             _entity.Add(entity);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
+            return entity;
         }
 
-        public T Get(int Id) {
+        public async Task<T> Get(Guid Id) {
             return _entity.Find(Id);
         }
 
-        public List<T> GetAll() {
+        public async Task<List<T>> GetAll() {
             return _entity.ToList();
         }
 
-        public void Update(T entity) {
+        public async Task Update(T entity) {
             _entity.Update(entity);
-            Context.SaveChanges();
+           await Context.SaveChangesAsync();
         }
 
-        public void Delete(int Id) {
+        public void Delete(Guid Id) {
             var entity = _entity.Find(Id);
             _entity.Remove(entity);
-            Context.SaveChanges();
+            Context.SaveChangesAsync();
         }
 
         

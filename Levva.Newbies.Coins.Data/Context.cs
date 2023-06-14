@@ -7,9 +7,9 @@ namespace Levva.Newbies.Coins.Data {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
-            modelBuilder.ApplyConfiguration(new CategoriaConfiguration());
-            modelBuilder.ApplyConfiguration(new TransacaoConfiguration());
-            modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new TransactionConfiguration());
 
             foreach (var entity in modelBuilder.Model.GetEntityTypes())
                 entity.SetTableName(entity.DisplayName());
@@ -17,8 +17,10 @@ namespace Levva.Newbies.Coins.Data {
             base.OnModelCreating(modelBuilder);
         }
 
-        public override int SaveChanges() {
-            return base.SaveChanges();
+        public async Task<int> SaveChangesAsync() {
+            return await base.SaveChangesAsync();
         }
+
+  
     }
 }
