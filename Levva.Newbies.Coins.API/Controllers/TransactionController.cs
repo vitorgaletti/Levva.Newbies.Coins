@@ -16,7 +16,6 @@ namespace Levva.Newbies.Coins.Controllers {
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public async Task<ActionResult<TransactionDto>> Create(TransactionDto transaction) {
             var result = await _service.Create(transaction);
 
@@ -33,7 +32,6 @@ namespace Levva.Newbies.Coins.Controllers {
         }
 
         [HttpGet("{pageSize:int}/{pageNumber:int}")]
-        [AllowAnonymous]
         public async Task<ActionResult<TransactionResult>> GetAll([FromQuery] string? search, int pageSize, int pageNumber) {
             var result = await _service.GetAll(search, pageSize, pageNumber);
             return Ok(result);
@@ -47,7 +45,6 @@ namespace Levva.Newbies.Coins.Controllers {
 
         [HttpDelete]
         [Route("{id}")]
-        [AllowAnonymous]
         public async Task<ActionResult> Delete(Guid id) {
             var result = await _service.Delete(id);
 

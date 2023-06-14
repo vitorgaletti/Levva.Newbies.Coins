@@ -37,7 +37,6 @@ namespace Levva.Newbies.Coins.Controllers {
         }
 
         [HttpGet("list")]
-        [AllowAnonymous]
         public ActionResult<Task<List<UserDto>>> GetAll() {
             return _service.GetAll();
         }

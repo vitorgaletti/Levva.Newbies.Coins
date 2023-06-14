@@ -31,7 +31,6 @@ namespace Levva.Newbies.Coins.Controllers {
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<ActionResult<List<CategoryDto>>> GetAll() {
             var categories = await _service.GetAll();
             return categories;
