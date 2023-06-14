@@ -72,6 +72,8 @@ public class Program {
 
         builder.Services.AddNewbiesService(builder.Configuration);
 
+        
+
         builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 

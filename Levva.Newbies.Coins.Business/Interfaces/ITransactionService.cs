@@ -5,7 +5,7 @@ namespace Levva.Newbies.Coins.Business.Interfaces {
     public interface ITransactionService {
         Task<ResultService<TransactionDto>> Create(TransactionDto transaction);
         TransactionDto Get(Guid Id);
-        List<TransactionDto> GetAll(string? search, int limit, int offset);
+        Task<TransactionResult> GetAll(string? search, int limit, int offset);
         void Update(TransactionDto transaction);
         Task<ResultService> Delete(Guid Id);
     }

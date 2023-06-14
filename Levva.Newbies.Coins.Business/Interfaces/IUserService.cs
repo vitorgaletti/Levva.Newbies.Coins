@@ -6,7 +6,7 @@ namespace Levva.Newbies.Coins.Business.Interfaces {
     public interface IUserService {
         Task<ResultService<UserDto>> Create(UserDto user);
         Task<ResultService<UserDto>> Get(Guid Id);
-        List<UserDto> GetAll();
+        Task<List<UserDto>> GetAll();
         Task<ResultService> Update(Guid id, UpdateUserDto name);
         void Delete(Guid Id);
         Task<ResultService<LoginDto>> Login(LoginDto login);
