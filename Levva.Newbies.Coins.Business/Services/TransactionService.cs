@@ -61,9 +61,15 @@ namespace Levva.Newbies.Coins.Business.Services {
            return transaction;
         }
 
-        public List<TransactionDto> GetAll(string? search, int limit, int offset) {
-            var transactions = _mapper.Map<List<TransactionDto>>(_repository.GetAll(search, limit, offset));
-            return transactions;
+        public async Task<TransactionResult> GetAll(string? search, int limit, int offset) {
+            var (transactions, totalPages) = await _repository.GetAll(search, limit, offset);
+            
+            var transactionsDto = _mapper.Map<List<TransactionDto>>(transactions);
+
+            return new TransactionResult {
+                Transactions = transactionsDto,
+                TotalPages = totalPages
+            };
         }
 
         public void Update(TransactionDto transaction) {

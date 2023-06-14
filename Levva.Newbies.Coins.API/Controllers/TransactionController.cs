@@ -1,5 +1,6 @@
 ﻿using Levva.Newbies.Coins.Business.Dtos;
 using Levva.Newbies.Coins.Business.Interfaces;
+using Levva.Newbies.Coins.Business.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,8 +34,9 @@ namespace Levva.Newbies.Coins.Controllers {
 
         [HttpGet("{pageSize:int}/{pageNumber:int}")]
         [AllowAnonymous]
-        public ActionResult<List<TransactionDto>> GetAll([FromQuery] string? search, int pageSize, int pageNumber) {
-            return _service.GetAll(search, pageSize, pageNumber);
+        public async Task<ActionResult<TransactionResult>> GetAll([FromQuery] string? search, int pageSize, int pageNumber) {
+            var result = await _service.GetAll(search, pageSize, pageNumber);
+            return Ok(result);
         }
 
         [HttpPut]

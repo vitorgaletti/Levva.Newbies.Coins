@@ -59,8 +59,9 @@ namespace Levva.Newbies.Coins.Business.Services {
             return ResultService.Ok(_user);
         }
 
-        public List<UserDto> GetAll() {
-            var users = _mapper.Map<List<UserDto>>(_repository.GetAll());
+        public async Task<List<UserDto>> GetAll() {
+            var result = await _repository.GetAll();
+            var users = _mapper.Map<List<UserDto>>(result);
             return users;
         }
 
