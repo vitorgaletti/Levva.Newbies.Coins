@@ -32,6 +32,7 @@ namespace Levva.Newbies.Coins.Controllers {
         }
 
         [HttpGet("{pageSize:int}/{pageNumber:int}")]
+        [AllowAnonymous]
         public async Task<ActionResult<TransactionResult>> GetAll([FromQuery] string? search, int pageSize, int pageNumber) {
             var result = await _service.GetAll(search, pageSize, pageNumber);
             return Ok(result);
