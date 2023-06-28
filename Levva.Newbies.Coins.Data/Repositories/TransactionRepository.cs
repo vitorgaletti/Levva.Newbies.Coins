@@ -1,5 +1,6 @@
 ﻿using Levva.Newbies.Coins.Data;
 using Levva.Newbies.Coins.Data.Interfaces;
+using Levva.Newbies.Coins.Domain.Enums;
 using Levva.Newbies.Coins.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,12 +13,14 @@ namespace Levva.Newbies.Coins.Data.Repositories {
             return await Context.Set<Transaction>().FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<(List<Transaction> transactions, int totalPages)> GetAll(string? search, int limit = 10, int offset = 1) {
+        public async Task<(List<Transaction> transactions, int totalPages, decimal totalIncomes, decimal totalOutcomes, decimal totalBalance)> GetAll(string? search, int limit = 10, int offset = 1) {
             IQueryable<Transaction> query = Entity.Include(e => e.Category)
                                                   .Include(e => e.User)
                                                   .OrderByDescending(e => e.CreatedAt);
 
-            
+            var totalIncomes = await query.Where(e => e.Amount > 0 && e.Type == TypeTransaction.Entrada).SumAsync(e => (double)e.Amount);
+            var totalOutcomes = await query.Where(e => e.Amount > 0 && e.Type == TypeTransaction.Saida).SumAsync(e => (double)e.Amount);
+            var totalBalance = totalIncomes - totalOutcomes;
 
             if (!string.IsNullOrEmpty(search)) {
                 query = query.Where(e =>
@@ -33,7 +36,7 @@ namespace Levva.Newbies.Coins.Data.Repositories {
                                           .Take(limit)
                                           .ToListAsync();
 
-            return (transactions, totalPages);
+            return (transactions, totalPages, (decimal)totalIncomes, (decimal)totalOutcomes, (decimal)totalBalance);
         }
 
 
